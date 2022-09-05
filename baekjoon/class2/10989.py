@@ -1,7 +1,12 @@
+import sys
+
+
+input = sys.stdin.readline
+
 N = int(input())
-numbers = list()
+boxes = [0] * 10001
 for _ in range(N):
-    numbers.append(int(input()))
-numbers.sort()
-for i in numbers:
-    print(i)
+    boxes[int(input())] += 1
+for i in range(10001):
+    for _ in range(boxes[i]):
+        print(i)
