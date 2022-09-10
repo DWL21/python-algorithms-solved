@@ -1,9 +1,10 @@
+import collections
+
+
 N = int(input())
-answer = [i + 1 for i in range(N)]
-front = 0
-rear = -1
-while rear - front != 1:
-    front = (front + 1) % len(answer)
-    rear = (rear + 1) % len(answer)
-    answer[rear] = answer[front]
-print(answer[front])
+cards = collections.deque([i + 1 for i in range(N)])
+index = -1
+while len(cards) > 2:
+    cards.popleft()
+    cards.append(cards.popleft())
+print(cards.pop())
