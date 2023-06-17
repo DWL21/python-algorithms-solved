@@ -9,4 +9,3 @@ for _ in range(N):
 
 DP = [(0, 0) for _ in range(N + 1)]
 DP[1] = (stairs[1], 1)
-DP[2] =
