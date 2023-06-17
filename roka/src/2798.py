@@ -6,8 +6,8 @@ input = sys.stdin.readline
 def select_cards(n: int) -> list:
   positions = []
   for i in range(n-2):
-    for j in range(i + 1, n-1):
-      for k in range(j + 1, n):
+    for j in range(i+1, n-1):
+      for k in range(j+1, n):
         positions.append((i, j, k))
   return positions
 
