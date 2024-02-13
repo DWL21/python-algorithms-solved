@@ -20,18 +20,20 @@ def find_parent(x):
 
 
 def union_parent(a, b):
-    parentA = find_parent(a)
-    parentB = find_parent(b)
-    if parentA < parentB:
-        parents[parentB] = parentA
+    A = find_parent(a)
+    B = find_parent(b)
+    if A < B:
+        parents[B] = A
         return
-    parents[parentA] = parentB
+    parents[A] = B
 
 
 result = 0
+maximum = 0
 for c, a, b in graph:
     if find_parent(a) != find_parent(b):
         union_parent(a, b)
+        maximum = max(maximum, c)
         result += c
 
-print(result)
+print(result - maximum)
