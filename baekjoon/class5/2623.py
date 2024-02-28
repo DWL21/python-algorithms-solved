@@ -1,32 +1,29 @@
-A = ' ' + input()
-B = ' ' + input()
-dp = [[0] * len(B) for _ in range(len(A))]
-histories = [[0] * len(B) for _ in range(len(A))] 
-for i in range(1, len(A)):
-    for j in range(1, len(B)):
-        if A[i] == B[j]:
-            dp[i][j] = dp[i - 1][j - 1] + 1
-            histories[i][j] = 2
-        elif dp[i - 1][j] > dp[i][j - 1]:
-            dp[i][j] = dp[i - 1][j]
-            histories[i][j] = 3
-        else:
-            dp[i][j] = dp[i][j - 1]
-            histories[i][j] = 1
-answer = dp[len(A) - 1][len(B) - 1]
-print(answer)
-if answer:
-    i = len(A) - 1
-    j = len(B) - 1
-    sentence = []
-    while histories[i][j] and i > 0 and j > 0:
-        if histories[i][j] == 2:
-            sentence.append(A[i])
-            i -= 1
-            j -= 1
-        elif histories[i][j] == 1:
-            j -= 1
-        else:
-            i -= 1
-    sentence.reverse()
-    print(''.join(map(str, sentence)))
+from collections import defaultdict
+from collections import deque
+
+N, M = map(int, input().split())
+graph = defaultdict(list)
+indegree = [0] * (N + 1)
+for _ in range(M):
+    plan = list(map(int, input().split()[1:]))
+    for i, value in enumerate(plan[:-1]):
+        graph[value].append(plan[i + 1])
+        indegree[plan[i + 1]] += 1
+
+q = deque()
+answer = []
+visited = [False] * (N + 1)
+for i in range(1, N + 1):
+    if not indegree[i]:
+        q.append(i)
+while q:
+    now = q.popleft()
+    answer.append(now)
+    visited[now] = True
+    for i in graph[now]:
+        indegree[i] -= 1
+        if not indegree[i]:
+            q.append(i)
+
+
+print(visited)
