@@ -1,7 +1,7 @@
 N = int(input())
 numbers = list(map(int, input().split()))
 
-answer = int(1e9)
+answer = int(1e10) + 1
 answer_right = 0
 answer_left = 0
 
